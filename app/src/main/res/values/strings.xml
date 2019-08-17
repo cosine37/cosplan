@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">cosplan</string>
+    <string name="title_activity_big_plans">BigPlansActivity</string>
 </resources>
