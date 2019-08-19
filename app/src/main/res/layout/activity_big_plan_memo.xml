@@ -25,7 +25,6 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintStart_toEndOf="@+id/Title"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +47,6 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintStart_toEndOf="@+id/Type"
         app:layout_constraintTop_toBottomOf="@+id/TitleEdit" />
 
@@ -65,19 +63,29 @@
 
     <EditText
         android:id="@+id/ContentEdit"
-        android:layout_width="280dp"
-        android:layout_height="323dp"
+        android:layout_width="271dp"
+        android:layout_height="238dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/textview_border"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:scrollbars="horizontal"
-        android:background="@drawable/textview_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.28"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ContentText" />
+
+    <Button
+        android:id="@+id/SaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ContentEdit" />
 
 </android.support.constraint.ConstraintLayout>
