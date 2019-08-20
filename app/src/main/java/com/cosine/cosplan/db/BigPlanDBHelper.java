@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.cosine.cosplan.record.BigPlan;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BigPlanDBHelper {
     private static final String DATABASE_NAME = "myDatabase";
     private static final int DATABASE_Version = 1;
@@ -51,5 +54,16 @@ public class BigPlanDBHelper {
         return buffer.toString();
     }
 
+    public List<String> getAllTitles(){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String[] columns = {TITLE,TYPE,CONTENT};
+        Cursor cursor =db.query(TABLE_NAME,columns,null,null,null,null,null);
+        List<String> titles = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String title = cursor.getString(cursor.getColumnIndex(TITLE));
+            titles.add(title);
+        }
+        return titles;
+    }
 
 }
