@@ -70,6 +70,12 @@ public class BigPlanDBHelper {
         return bigPlan;
     }
 
+    public void deletePlan(String title){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String query = "DELETE FROM "+ TABLE_NAME + " WHERE " + TITLE + " = '" + title + "'";
+        db.execSQL(query);
+    }
+
     public List<String> getAllTitles(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String[] columns = {TITLE,TYPE,CONTENT};

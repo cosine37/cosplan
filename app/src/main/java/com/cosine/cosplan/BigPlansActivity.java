@@ -1,6 +1,7 @@
 package com.cosine.cosplan;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cosine.cosplan.db.BigPlanDBHelper;
 
@@ -20,7 +22,6 @@ public class BigPlansActivity extends AppCompatActivity implements View.OnClickL
 
     FloatingActionButton addButton;
     LinearLayout svll;
-    String choosenTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +44,15 @@ public class BigPlansActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public void showAllBigPlans(){
+    public void showAllBigPlans() {
         BigPlanDBHelper dbHelper = new BigPlanDBHelper(this);
         List<String> titles = dbHelper.getAllTitles();
         TextView textView;
         Button viewButton;
+        Button deleteButton;
         LinearLayout sll;
         LinearLayout bll;
-        for (int i=0;i<titles.size();i++){
+        for (int i = 0; i < titles.size(); i++) {
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, 120);
 
@@ -60,14 +62,47 @@ public class BigPlansActivity extends AppCompatActivity implements View.OnClickL
 
             viewButton = new Button(this);
             viewButton.setText("View");
-            viewButton.setOnClickListener(this);
             viewButton.setContentDescription(titles.get(i));
-            viewButton.setOnClickListener(new View.OnClickListener(){
+            viewButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view){
+                public void onClick(View view) {
                     Intent intent = new Intent(BigPlansActivity.this, BigPlanViewActivity.class);
                     intent.putExtra("title", view.getContentDescription());
                     startActivity(intent);
+                }
+            });
+
+            deleteButton = new Button(this);
+            deleteButton.setText("Delete");
+            deleteButton.setContentDescription(titles.get(i));
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String TTL = (String) view.getContentDescription();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(BigPlansActivity.this);
+                    dialog.setTitle("Delete");
+                    dialog.setMessage("Are you sure you want to delete " + view.getContentDescription());
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            BigPlanDBHelper dbHelper = new BigPlanDBHelper(BigPlansActivity.this);
+                            dbHelper.deletePlan(TTL);
+                            Toast.makeText(BigPlansActivity.this, "Deleted " + TTL, Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
+                            finish();
+                            startActivity(getIntent());
+                        }
+                    });
+                    dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    AlertDialog ad = dialog.create();
+                    ad.show();
                 }
             });
 
@@ -76,6 +111,7 @@ public class BigPlansActivity extends AppCompatActivity implements View.OnClickL
             bll.setLayoutParams(lp);
             bll.setGravity(Gravity.RIGHT);
             bll.addView(viewButton);
+            bll.addView(deleteButton);
 
             sll = new LinearLayout(this);
             sll.setOrientation(LinearLayout.HORIZONTAL);
@@ -88,15 +124,6 @@ public class BigPlansActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void newMemo(){
-        /*
-        AlertDialog.Builder dialog = new AlertDialog.Builder(BigPlansActivity.this);
-        dialog.setTitle("New Dialog");
-        dialog.setMessage("Message");
-        dialog.setCancelable(true);
-
-        AlertDialog ad = dialog.create();
-        ad.show();
-        */
         Intent intent = new Intent(BigPlansActivity.this, BigPlanMemoActivity.class);
         intent.putExtra("action", Constants.ADDMEMO);
         startActivity(intent);
