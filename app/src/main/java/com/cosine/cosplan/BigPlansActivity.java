@@ -20,6 +20,7 @@ public class BigPlansActivity extends AppCompatActivity implements View.OnClickL
 
     FloatingActionButton addButton;
     LinearLayout svll;
+    String choosenTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,16 @@ public class BigPlansActivity extends AppCompatActivity implements View.OnClickL
 
             viewButton = new Button(this);
             viewButton.setText("View");
+            viewButton.setOnClickListener(this);
+            viewButton.setContentDescription(titles.get(i));
+            viewButton.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Intent intent = new Intent(BigPlansActivity.this, BigPlanViewActivity.class);
+                    intent.putExtra("title", view.getContentDescription());
+                    startActivity(intent);
+                }
+            });
 
             bll = new LinearLayout(this);
             bll.setOrientation(LinearLayout.HORIZONTAL);

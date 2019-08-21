@@ -54,10 +54,26 @@ public class BigPlanDBHelper {
         return buffer.toString();
     }
 
+    public BigPlan getPlan(String title){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String query = "SELECT * FROM "+ TABLE_NAME + " WHERE " + TITLE + " = '" + title + "'";
+        Cursor cursor = db.rawQuery(query,null);
+        BigPlan bigPlan = new BigPlan();
+        while (cursor.moveToNext()){
+            String type = cursor.getString(cursor.getColumnIndex(TYPE));
+            String content = cursor.getString(cursor.getColumnIndex(CONTENT));
+            bigPlan.setTitle(title);
+            bigPlan.setType(type);
+            bigPlan.setContent(content);
+            break;
+        }
+        return bigPlan;
+    }
+
     public List<String> getAllTitles(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String[] columns = {TITLE,TYPE,CONTENT};
-        Cursor cursor =db.query(TABLE_NAME,columns,null,null,null,null,null);
+        Cursor cursor = db.query(TABLE_NAME,columns,null,null,null,null,null);
         List<String> titles = new ArrayList<>();
         while (cursor.moveToNext()) {
             String title = cursor.getString(cursor.getColumnIndex(TITLE));
