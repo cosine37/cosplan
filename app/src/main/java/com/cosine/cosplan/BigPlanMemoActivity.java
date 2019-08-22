@@ -16,6 +16,7 @@ public class BigPlanMemoActivity extends AppCompatActivity {
     EditText typeEdit;
     EditText contentEdit;
     Button saveButton;
+    Button cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class BigPlanMemoActivity extends AppCompatActivity {
         typeEdit = findViewById(R.id.TypeEdit);
         contentEdit = findViewById(R.id.ContentEdit);
         saveButton = findViewById(R.id.SaveButton);
+        cancelButton = findViewById(R.id.CancelButton);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +37,15 @@ public class BigPlanMemoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        cancelButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
 
     }
 

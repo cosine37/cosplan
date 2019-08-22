@@ -88,4 +88,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ContentEdit" />
 
+    <Button
+        android:id="@+id/CancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="cancel"
+        app:layout_constraintEnd_toStartOf="@+id/SaveButton"
+        app:layout_constraintTop_toBottomOf="@+id/ContentEdit" />
+
 </android.support.constraint.ConstraintLayout>
