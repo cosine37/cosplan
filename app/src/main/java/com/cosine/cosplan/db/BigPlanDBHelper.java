@@ -13,9 +13,9 @@ import java.util.List;
 public class BigPlanDBHelper {
     private static final String DATABASE_NAME = "myDatabase";
     private static final int DATABASE_Version = 1;
-    private static final String TITLE = "title";
-    private static final String TYPE = "type";
-    private static final String CONTENT = "content";
+    public static final String TITLE = "title";
+    public static final String TYPE = "type";
+    public static final String CONTENT = "content";
     private static final String TABLE_NAME = "bigPlan";
     private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ("
             + TITLE + " VARCHAR(63) PRIMARY KEY, " + TYPE + " VARCHAR(63) ,"
@@ -38,6 +38,13 @@ public class BigPlanDBHelper {
 
     public long insertData(BigPlan bigPlan){
         return insertData(bigPlan.getTitle(), bigPlan.getType(), bigPlan.getContent());
+    }
+
+    public void updateData(String title, String field, String value){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String query = "UPDATE "+ TABLE_NAME + " SET " + field + " = '" + value
+                + "' WHERE "  + TITLE + " = '" + title + "'";
+        db.execSQL(query);
     }
 
     public String getData(){

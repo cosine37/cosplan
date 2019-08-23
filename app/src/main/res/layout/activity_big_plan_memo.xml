@@ -19,8 +19,8 @@
 
     <EditText
         android:id="@+id/TitleEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="192dp"
+        android:layout_height="45dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:ems="10"
@@ -41,8 +41,8 @@
 
     <EditText
         android:id="@+id/TypeEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="192dp"
+        android:layout_height="45dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
         android:ems="10"
@@ -63,7 +63,7 @@
 
     <EditText
         android:id="@+id/ContentEdit"
-        android:layout_width="271dp"
+        android:layout_width="311dp"
         android:layout_height="238dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"

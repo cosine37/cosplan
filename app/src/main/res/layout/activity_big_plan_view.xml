@@ -67,11 +67,51 @@
     <TextView
         android:id="@+id/contentText"
         android:layout_width="322dp"
-        android:layout_height="278dp"
+        android:layout_height="228dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <Button
+        android:id="@+id/EditTypeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Edit"
+        app:layout_constraintStart_toEndOf="@+id/typeText"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <Button
+        android:id="@+id/EditContentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Edit"
+        app:layout_constraintStart_toEndOf="@+id/content"
+        app:layout_constraintTop_toBottomOf="@+id/type" />
+
+    <Button
+        android:id="@+id/BackButon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contentText" />
+
+    <Button
+        android:id="@+id/DeleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="delete"
+        app:layout_constraintEnd_toStartOf="@+id/BackButon"
+        app:layout_constraintTop_toBottomOf="@+id/contentText" />
 
 </android.support.constraint.ConstraintLayout>

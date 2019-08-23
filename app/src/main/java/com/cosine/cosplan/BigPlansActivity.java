@@ -66,6 +66,7 @@ public class BigPlansActivity extends AppCompatActivity implements View.OnClickL
             viewButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    finish();
                     Intent intent = new Intent(BigPlansActivity.this, BigPlanViewActivity.class);
                     intent.putExtra("title", view.getContentDescription());
                     startActivity(intent);
@@ -124,6 +125,7 @@ public class BigPlansActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void newMemo(){
+        finish();
         Intent intent = new Intent(BigPlansActivity.this, BigPlanMemoActivity.class);
         intent.putExtra("action", Constants.ADDMEMO);
         startActivity(intent);

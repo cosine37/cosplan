@@ -33,6 +33,7 @@ public class BigPlanMemoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveMemo();
+                finish();
                 Intent intent = new Intent(BigPlanMemoActivity.this, BigPlansActivity.class);
                 startActivity(intent);
             }
@@ -42,6 +43,8 @@ public class BigPlanMemoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+                Intent intent = new Intent(BigPlanMemoActivity.this, BigPlansActivity.class);
+                startActivity(intent);
             }
         });
 
