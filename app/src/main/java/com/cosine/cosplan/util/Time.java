@@ -11,18 +11,18 @@ public class Time {
     int hour;
     int minute;
 
+    Date date;
 
     public Time(){
 
     }
 
     public void currentTime(){
-        Date date = new Date();
-        Calendar calendar = new Calendar();
+        date = new Date();
+        Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        year = date.getYear()+1900;
-        month = date.getMonth();
-        day = date.getDate();
+        date = calendar.getTime();
+
     }
 
     public boolean validDate(int year, int month, int day){
@@ -93,5 +93,13 @@ public class Time {
 
     public void setMinute(int minute) {
         this.minute = minute;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

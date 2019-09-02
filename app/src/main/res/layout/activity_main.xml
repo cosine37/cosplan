@@ -54,6 +54,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/calendarLayout"
         android:layout_width="360dp"
         android:layout_height="136dp"
         android:layout_marginStart="24dp"

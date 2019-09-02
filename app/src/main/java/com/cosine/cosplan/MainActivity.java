@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
     LinearLayout bigPlansLayout;
+    LinearLayout calendarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 Intent intent = new Intent(MainActivity.this, BigPlansActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        calendarLayout = findViewById(R.id.calendarLayout);
+        calendarLayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
                 startActivity(intent);
             }
         });
