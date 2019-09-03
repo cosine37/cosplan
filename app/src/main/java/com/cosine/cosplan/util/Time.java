@@ -22,7 +22,9 @@ public class Time {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         date = calendar.getTime();
-
+        year = date.getYear() + 1900;
+        month = date.getMonth();
+        day = date.getDate();
     }
 
     public boolean validDate(int year, int month, int day){

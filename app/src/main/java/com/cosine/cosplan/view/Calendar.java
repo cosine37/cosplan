@@ -12,45 +12,83 @@ public class Calendar extends View {
 
     String[] WEEKDAYS = {"S", "M", "T", "W", "T", "F", "S"};
 
-    Time time;
-
-    int backgroundColor = 0xffff0000;
-    int dayColor = 0xffffff00;
+    int backgroundColor = 0xffffffff;
+    int dayColor = 0xffff0000;
 
     float height;
     float weight;
 
-    Paint dayPaint;
+
 
     public Calendar(Context context, AttributeSet attrs) {
         super(context, attrs);
         height = 24;
         weight = 24;
-        dayPaint = new Paint();
+
     }
 
     @Override
     protected void onDraw(Canvas canvas){
         canvas.drawColor(backgroundColor);
+
         int x,y;
         int nx = 7;
-        int ny = 5;
-        int height = 50;
-        int width = 50;
+        int ny = 6;
+        int height = 150;
+        int width = 140;
+        int marginTop = 250;
+        int marginLeft = 50;
+        int totalWidth = width*nx;
+
+        drawMonth(canvas, marginLeft + totalWidth/2, marginTop/2);
+
         String text;
-        for (y=0;y<ny;y++){
+        for (x=0;x<nx;x++){
+            drawDay(canvas, WEEKDAYS[x], marginLeft+x*width+width/2, marginTop+height/2);
+        }
+        for (y=1;y<ny;y++){
             for (x=0;x<nx;x++){
                 text = Integer.toString(y*nx+x);
-                drawDay(canvas, text, width+x*width,height+y*height);
+                drawDay(canvas, text, marginLeft+x*width+width/2, marginTop+height+y*height-height/2);
             }
         }
+        drawLines(canvas,height,width,nx,ny,marginTop,marginLeft);
 
     }
 
     void drawDay(Canvas canvas, String text, int x, int y){
-        dayPaint.setTextSize(20);
+        int textSize = 50;
+        Paint dayPaint = new Paint();
+        dayPaint.setTextAlign(Paint.Align.CENTER);
+        dayPaint.setTextSize(textSize);
         dayPaint.setColor(dayColor);
-        canvas.drawText(text,x, y, dayPaint);
+        canvas.drawText(text,x, y+textSize/4, dayPaint);
+    }
+
+    void drawLines(Canvas canvas, int height, int width, int nx, int ny, int marginTop, int marginLeft){
+        Paint paint = new Paint();
+        paint.setColor(0xff000000);
+        paint.setStrokeWidth(3);
+        for (int i=0;i<=ny;i++){
+            canvas.drawLine(marginLeft, marginTop+i*height,
+                    marginLeft+nx*width, marginTop+i*height, paint);
+        }
+        for (int i=0;i<=nx;i++){
+            canvas.drawLine(marginLeft + i*width, marginTop,
+                    marginLeft + i*width, marginTop+ny*height, paint);
+        }
+    }
+
+    void drawMonth(Canvas canvas, int x, int y){
+        int textSize = 80;
+        Paint paint = new Paint();
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(textSize);
+        paint.setColor(0xff0000ff);
+        Time time = new Time();
+        time.currentTime();
+        String s = time.getYear() + "/" + String.format("%02d", time.getMonth());
+        canvas.drawText(s, x, y, paint);
     }
 
 }
