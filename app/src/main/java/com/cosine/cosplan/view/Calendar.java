@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.cosine.cosplan.util.Time;
 
+import java.util.List;
+
 public class Calendar extends View {
 
     String[] WEEKDAYS = {"S", "M", "T", "W", "T", "F", "S"};
@@ -18,6 +20,7 @@ public class Calendar extends View {
     float height;
     float weight;
 
+    Time time;
 
 
     public Calendar(Context context, AttributeSet attrs) {
@@ -40,15 +43,21 @@ public class Calendar extends View {
         int marginLeft = 50;
         int totalWidth = width*nx;
 
+        time = new Time();
+        time.currentTime();
+
         drawMonth(canvas, marginLeft + totalWidth/2, marginTop/2);
 
         String text;
         for (x=0;x<nx;x++){
             drawDay(canvas, WEEKDAYS[x], marginLeft+x*width+width/2, marginTop+height/2);
         }
+
+        List<List<String>> calendarTable = time.buildCalendarTable();
+
         for (y=1;y<ny;y++){
             for (x=0;x<nx;x++){
-                text = Integer.toString(y*nx+x);
+                text = calendarTable.get(y-1).get(x);
                 drawDay(canvas, text, marginLeft+x*width+width/2, marginTop+height+y*height-height/2);
             }
         }
@@ -85,10 +94,19 @@ public class Calendar extends View {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(textSize);
         paint.setColor(0xff0000ff);
-        Time time = new Time();
-        time.currentTime();
         String s = time.getYear() + "/" + String.format("%02d", time.getMonth());
         canvas.drawText(s, x, y, paint);
+        paint.setTextSize(textSize + 20);
+        canvas.drawText("<", x-400, y, paint);
+        canvas.drawText(">", x+400, y, paint);
+    }
+
+    boolean isToday(Time time){
+        Time today = new Time();
+        today.currentTime();
+        if (today.getYear() == time.getYear() && today.getMonth() == time.getMonth() &&
+            today.getDay() == time.getDay()) return true;
+        return false;
     }
 
 }
