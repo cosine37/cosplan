@@ -125,6 +125,22 @@ public class Time {
         return true;
     }
 
+    public void prevMonth(){
+        month = month - 1;
+        if (month == 0){
+            month = 12;
+            year = year - 1;
+        }
+    }
+
+    public void nextMonth(){
+        month = month + 1;
+        if (month == 13){
+            month = 1;
+            year = year + 1;
+        }
+    }
+
     public int getYear() {
         return year;
     }

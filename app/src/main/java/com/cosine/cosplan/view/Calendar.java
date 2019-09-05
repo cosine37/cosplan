@@ -27,7 +27,8 @@ public class Calendar extends View {
         super(context, attrs);
         height = 24;
         weight = 24;
-
+        time = new Time();
+        time.currentTime();
     }
 
     @Override
@@ -42,9 +43,6 @@ public class Calendar extends View {
         int marginTop = 250;
         int marginLeft = 50;
         int totalWidth = width*nx;
-
-        time = new Time();
-        time.currentTime();
 
         drawMonth(canvas, marginLeft + totalWidth/2, marginTop/2);
 
@@ -101,12 +99,53 @@ public class Calendar extends View {
         canvas.drawText(">", x+400, y, paint);
     }
 
+    public int click(float x, float y){
+        int nx = 7;
+        int width = 140;
+        int marginTop = 250;
+        int marginLeft = 50;
+        int totalWidth = width*nx;
+
+        float leftx = marginLeft + totalWidth/2 - 400;
+        float lefty = marginTop/2 - 50/4;
+
+        float rightx = marginLeft + totalWidth/2 + 400;
+        float righty = marginTop/2 - 50/4;
+
+        System.out.println("left: ("+leftx+","+lefty+")");
+        System.out.println("right: ("+rightx+","+righty+")");
+
+        float h = 50;
+        float v = 50;
+
+        int ans = 0;
+        float dh, dv;
+
+        dh = Math.abs(x-leftx);
+        dv = Math.abs(y-lefty);
+        if (dh<h && dv<v) ans = 1;
+
+        dh = Math.abs(x-rightx);
+        dv = Math.abs(y-righty);
+        if (dh<h && dv<v) ans = 2;
+
+        return ans;
+    }
+
     boolean isToday(Time time){
         Time today = new Time();
         today.currentTime();
         if (today.getYear() == time.getYear() && today.getMonth() == time.getMonth() &&
             today.getDay() == time.getDay()) return true;
         return false;
+    }
+
+    public void prevMonth(){
+        time.prevMonth();
+    }
+
+    public void nextMonth(){
+        time.nextMonth();
     }
 
 }
